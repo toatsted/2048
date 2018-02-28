@@ -1,0 +1,19 @@
+body {
+	font-family: monospace;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+td {
+	width: 80px;
+	height: 80px;
+	text-align: center;
+}
