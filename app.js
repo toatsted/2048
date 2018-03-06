@@ -6,11 +6,23 @@ function randInt(limit) {
 
 function create2dArray() {
 	let emptyGrid = new Array(gridSize);
-	emptyGrid.forEach((value) => {
-		value = new Array(gridSize);
-	});
-
+	for (let i = 0; i < gridSize; i++) {
+		emptyGrid[i] = new Array(gridSize);
+		for (let o = 0; o < gridSize; o++) {
+			emptyGrid[i][o] = 0;
+		}
+	}
 	return emptyGrid;
+}
+
+function createTable() {
+	for (let i = 0; i < gridSize; i++) {
+		let row = $("<tr>").attr("id", "#row" + i);
+		for (let o = 0; o < gridSize; o++) {
+			row.append($("<td>").attr("id", ".col" + o));
+		}
+		$("table").append(row);
+	}
 }
 
 $(document).ready(() => {
@@ -24,8 +36,15 @@ $(document).ready(() => {
 		startGame() {
 			for (let i = 0; i < 2; i++) {
 				Board.addPiece();
-				Board.pieces[i].display();
 			}
+		},
+
+		display() {
+			Board.pieces.forEach((value, index) => {
+				$("#row" + value.position.row)
+					.find(".col" + value.position.col)
+					.text(value.num);
+			});
 		},
 
 		addPiece() {
@@ -46,11 +65,15 @@ $(document).ready(() => {
 				}
 
 			});
+			twoOrFour = (randInt(10) === 0) ? 4 : 2;
 
-			Board.pieces.push(new Piece(randPosition, (randInt(10) === 0) ? 4 : 2));
+			Board.grid[randPosition.row][randPosition.col] = twoOrFour;
+			Board.pieces.push(new Piece(randPosition, twoOrFour));
+			Board.display();
 		},
 
 		slide() {
+
 		},
 
 	}
@@ -64,18 +87,14 @@ $(document).ready(() => {
 
 		this.num = num;
 
-		this.display = function() {
-			$("#row" + this.position.row)
-				.find(".col" + this.position.col)
-				.text(this.num);
-		}
-
 	}
 
+	createTable();
 	Board.startGame();
+	console.log(Board.grid);
 
 	$("body").append($("<button>").text("slide").attr("id", "slide-button"));
-	$("body").on("click", "#slide-button", function(){
+	$("body").on("click", "#slide-button", function() {
 		Board.slide();
 	});
 });
