@@ -33,9 +33,12 @@ $(document).ready(() => {
 				row: randInt(gridSize),
 				col: randInt(gridSize),
 			}
+
 			Board.pieces.forEach((value) => {
+
 				while (randPosition.row === value.position.row &&
 					randPosition.col === value.position.col) {
+
 					randPosition = {
 						row: randInt(gridSize),
 						col: randInt(gridSize),
@@ -45,12 +48,9 @@ $(document).ready(() => {
 			});
 
 			Board.pieces.push(new Piece(randPosition, (randInt(10) === 0) ? 4 : 2));
-
-			console.log("randPosition:" + JSON.stringify(randPosition));
 		},
 
-		slide(direction) {
-
+		slide() {
 		},
 
 	}
@@ -64,7 +64,7 @@ $(document).ready(() => {
 
 		this.num = num;
 
-		this.display = function(){
+		this.display = function() {
 			$("#row" + this.position.row)
 				.find(".col" + this.position.col)
 				.text(this.num);
@@ -73,4 +73,9 @@ $(document).ready(() => {
 	}
 
 	Board.startGame();
+
+	$("body").append($("<button>").text("slide").attr("id", "slide-button"));
+	$("body").on("click", "#slide-button", function(){
+		Board.slide();
+	});
 });
