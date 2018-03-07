@@ -1,15 +1,15 @@
-const gridSize = 4;
+const gridSize = 3;
 
 function randInt(limit) {
 	return Math.floor(Math.random() * limit);
 }
 
 function create2dArray() {
-	let emptyGrid = new Array(gridSize);
+	let emptyGrid = [];
 	for (let i = 0; i < gridSize; i++) {
-		emptyGrid[i] = new Array(gridSize);
+		emptyGrid.push([0]);
 		for (let o = 0; o < gridSize; o++) {
-			emptyGrid[i][o] = 0;
+			emptyGrid[i].push([0]);
 		}
 	}
 	return emptyGrid;
@@ -83,19 +83,19 @@ $(document).ready(() => {
 		},
 
 		slide() {
-			for(let row = gridSize-1; row > 0; row--){
-				for(let col = gridSize-1; col > 0; col--){
-					while(!(Board.grid[row][col] === 0) &&
-						row > 0){
-						if(Board.grid[row + 1][col] === 0){
-							Board.grid[row][col].position.row++;
-							
-						}else {
-							break;
+			
+			for(let col = 0; col < gridSize; col++){
+				for(let row = gridSize - 1; row >= 0; row++){
+
+					if(!Board.grid[row][col] === 0){
+
+						if(!row === gridSize - 1){
+
 						}
 					}
 				}
 			}
+
 
 			Board.addPiece();
 			console.log(Board.grid);
