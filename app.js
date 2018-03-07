@@ -17,9 +17,9 @@ function create2dArray() {
 
 function createTable() {
 	for (let i = 0; i < gridSize; i++) {
-		let row = $("<tr>").attr("id", "#row" + i);
+		let row = $("<tr>").attr("id", "row" + i);
 		for (let o = 0; o < gridSize; o++) {
-			row.append($("<td>").attr("id", ".col" + o));
+			row.append($("<td>").addClass("col" + o));
 		}
 		$("table").append(row);
 	}
@@ -40,10 +40,20 @@ $(document).ready(() => {
 		},
 
 		display() {
+			for(let row = 0; row < gridSize; row++){
+				for(let col = 0; col < gridSize; col++){
+					Board.grid[row][col] = 0;
+				}
+			}
+
+			$("table").empty();
+			createTable();
+
 			Board.pieces.forEach((value, index) => {
 				$("#row" + value.position.row)
 					.find(".col" + value.position.col)
 					.text(value.num);
+				Board.grid[value.position.row][value.position.col] = value;
 			});
 		},
 
@@ -73,7 +83,22 @@ $(document).ready(() => {
 		},
 
 		slide() {
+			for(let row = gridSize-1; row > 0; row--){
+				for(let col = gridSize-1; col > 0; col--){
+					while(!(Board.grid[row][col] === 0) &&
+						row > 0){
+						if(Board.grid[row + 1][col] === 0){
+							Board.grid[row][col].position.row++;
+							
+						}else {
+							break;
+						}
+					}
+				}
+			}
 
+			Board.addPiece();
+			console.log(Board.grid);
 		},
 
 	}
@@ -86,7 +111,6 @@ $(document).ready(() => {
 		}
 
 		this.num = num;
-
 	}
 
 	createTable();
