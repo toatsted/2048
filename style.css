@@ -1,0 +1,14 @@
+.row {
+	display: inline-block;
+}
+
+.col-3 {
+	border: 1px solid black;
+}
+
+.slot {
+	padding: 0 30px;
+	font-size: 30px;
+	margin: 20px 0;
+	font-family: monospace;
+}
