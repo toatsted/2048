@@ -39,15 +39,38 @@ $(() => {
 					.find(".col" + value.location.col)
 						.text(value.num);
 			})
+		},
+
+		slide: function(row){
+			let end = [];
+			row.forEach((value, index) => {
+				(value === "0") ? null : end.push(value);
+			})
+			while(end.length < gridSize){
+				end.push("0");
+			}
+			return end;
 		}
-
 	}
 
-	function Piece(num, location) {
-		this.num = num;
-		this.location = location;
-		Board.pieces.push(this);
+	class Piece{
+		constructor(num, location){
+			this.num = num;
+			this.location = location;
+			Board.pieces.push(this);
+		}
 	}
 
-	Board.addPiece();
+
+	$("#slideButton").on("click", function() {
+		for(let i = 0; i < gridSize; i++){
+			let row = [];
+			for(let u = 0; u < gridSize; u++){
+				row.push($("#row" + i)
+					.find(".col" + u)
+					.text());
+			}
+			console.log(Board.slide(row));
+		}
+	})
 });
