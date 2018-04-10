@@ -39,6 +39,10 @@ $(() => {
 					.find(".col" + value.location.col)
 						.text(value.num);
 			})
+		},
+
+		slide: function() {
+			console.log("asdf");
 		}
 
 	}
@@ -49,5 +53,10 @@ $(() => {
 		Board.pieces.push(this);
 	}
 
+	$("#slide").on("click", function() {
+		Board.slide();
+	})
+
+	Board.addPiece();
 	Board.addPiece();
 });
