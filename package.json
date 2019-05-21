@@ -1,0 +1,19 @@
+{
+  "name": "2048",
+  "version": "1.0.0",
+  "description": "straight up clone of 2048 that I'm trying to make",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo index.py | entr -crs 'python index.py'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toatsted/2048.git"
+  },
+  "author": "Sam HIcks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toatsted/2048/issues"
+  },
+  "homepage": "https://github.com/toatsted/2048#readme"
+}
